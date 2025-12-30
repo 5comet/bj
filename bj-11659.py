@@ -1,16 +1,17 @@
 import sys
+input = sys.stdin.readline
+print = sys.stdout.write
 
 n, m = map(int, input().split())
-num = list(map(int, input().split()))
-numbersum= [0]
-
-for k in range(len(num)):
-    numbersum.append(numbersum[k]+num[k])
+nums = list(map(int, input().split()))
+sumlist = [0] * (n + 1)
 ans = []
 
-for _ in range(m):
-    i, j = map(int, input().split())
-    i -= 1 
-    ans.append(str(numbersum[j] - numbersum[i]))
+for i in range(1, n + 1):
+    sumlist[i] = sumlist[i-1] + nums[i-1]
 
+for _ in range(m):
+    s, e = map(int, input().split())
+    ans.append(str(sumlist[e] - sumlist[s - 1]))
+    
 print('\n'.join(ans))
